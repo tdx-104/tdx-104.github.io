@@ -1,19 +1,194 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
-  <title>Dongxu</title>
-  <link rel="icon" type="image/svg" href="/image/favicon.svg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人网站</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        glass: 'rgba(255, 255, 255, 0.1)',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .hero-section {
+            height: calc(100vh - 2rem);
+        }
+        .nav-hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        .nav-visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gradient-to-br from-purple-50 to-blue-100 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="glass-effect bg-glass fixed top-0 left-0 right-0 p-4 z-50 transition-all duration-300 nav-hidden">
+        <div class="container mx-auto">
+            <div class="flex gap-8">
+                <a href="#home" class="text-gray-600 hover:text-gray-900 transition-colors">首页</a>
+                <a href="#about" class="text-gray-600 hover:text-gray-900 transition-colors">关于</a>
+                <a href="#projects" class="text-gray-600 hover:text-gray-900 transition-colors">项目</a>
+                <a href="#contact" class="text-gray-600 hover:text-gray-900 transition-colors">联系</a>
+            </div>
+        </div>
+    </nav>
 
-<h1 style="background-color:Tomato;">你好！👋</h1>
-<h1 style="background-color:Orange;">这里是东旭。</h1>
-<h1 style="background-color:DodgerBlue;">我正在学习一些基本的前端知识，</h1>
-<h1 style="background-color:MediumSeaGreen;">为制作我的个人主页做准备。</h1>
-<h1 style="background-color:Gray;">Hello!👋</h1>
-<h1 style="background-color:SlateBlue;">This is Dongxu.</h1>
-<h1 style="background-color:Violet;">I am currently learning some basic front-end knowledge,</h1>
-<h1 style="background-color:LightGray;">Preparing for the creation of my personal webpage.</h1>
+    <!-- 主要内容区域 -->
+    <main class="container mx-auto px-4 max-w-6xl">
+        <!-- 个人简介部分 - 全屏展示 -->
+        <section id="home" class="hero-section flex items-center justify-center mb-8">
+            <div class="glass-effect bg-glass rounded-3xl p-12 w-full transform hover:scale-[1.02] transition-transform">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="w-48 h-48 md:w-64 md:h-64 relative">
+                        <img src="https://raw.githubusercontent.com/tdx-104/tdx-104.github.io/refs/heads/main/image/favicon.svg" 
+                             class="w-full h-full object-contain" alt="Profile">
+                    </div>
+                    <div class="flex-1 text-center md:text-left">
+                        <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-4">您好👋，我是东旭，这是一个利用AI生成的网站测试。</h1>
+                        <p class="text-2xl text-gray-600 mb-6">UI/UX 设计师</p>
+                        <p class="text-xl text-gray-600 max-w-2xl leading-relaxed">专注于创造美观且实用的数字产品体验，擅长将复杂的问题转化为简洁优雅的设计解决方案。结合用户研究和设计思维，打造富有同理心的交互体验。</p>
+                        <div class="mt-8 flex gap-4 justify-center md:justify-start">
+                            <a href="#about" class="px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">查看作品</a>
+                            <a href="#contact" class="px-8 py-3 bg-white/50 text-gray-800 rounded-full hover:bg-white/70 transition-colors">联系我</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- 关于我/技能展示 -->
+        <section id="about" class="glass-effect bg-glass rounded-3xl p-8 mb-8 transform hover:scale-[1.02] transition-transform">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">专业技能</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white/30 rounded-xl p-6 glass-effect">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/pen-tool.svg" class="w-6 h-6">
+                        <h3 class="text-lg font-semibold">UI 设计</h3>
+                    </div>
+                    <div class="space-y-2">
+                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm mr-2">Figma</span>
+                        <span class="inline-block px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm mr-2">Sketch</span>
+                        <span class="inline-block px-3 py-1 bg-orange-100 text-orange-600 rounded-full text-sm">Adobe XD</span>
+                    </div>
+                </div>
+                <div class="bg-white/30 rounded-xl p-6 glass-effect">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/users.svg" class="w-6 h-6">
+                        <h3 class="text-lg font-semibold">UX 研究</h3>
+                    </div>
+                    <div class="space-y-2">
+                        <span class="inline-block px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm mr-2">用户研究</span>
+                        <span class="inline-block px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm mr-2">原型设计</span>
+                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">可用性测试</span>
+                    </div>
+                </div>
+                <div class="bg-white/30 rounded-xl p-6 glass-effect">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://unpkg.com/lucide-static@latest/icons/palette.svg" class="w-6 h-6">
+                        <h3 class="text-lg font-semibold">视觉设计</h3>
+                    </div>
+                    <div class="space-y-2">
+                        <span class="inline-block px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm mr-2">品牌设计</span>
+                        <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-600 rounded-full text-sm mr-2">动效设计</span>
+                        <span class="inline-block px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-sm">插画</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 项目展示 -->
+        <section id="projects" class="glass-effect bg-glass rounded-3xl p-8 mb-8 transform hover:scale-[1.02] transition-transform">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">项目展示</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white/30 rounded-xl p-6 glass-effect">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" 
+                         class="w-full h-48 object-cover rounded-lg mb-4" alt="Project 1">
+                    <h3 class="text-xl font-semibold mb-2">电商App重设计</h3>
+                    <p class="text-gray-600 mb-4">通过用户研究和交互设计，提升用户购物体验，实现转化率提升40%。重点优化了商品展示和结账流程。</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">UI设计</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">用户体验</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm">原型设计</span>
+                    </div>
+                </div>
+                <div class="bg-white/30 rounded-xl p-6 glass-effect">
+                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" 
+                         class="w-full h-48 object-cover rounded-lg mb-4" alt="Project 2">
+                    <h3 class="text-xl font-semibold mb-2">金融Dashboard设计</h3>
+                    <p class="text-gray-600 mb-4">为金融机构设计的数据可视化界面，通过清晰的信息层级和直观的数据展示，提升决策效率。</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm">数据可视化</span>
+                        <span class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm">交互设计</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">用户研究</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系方式 -->
+        <section id="contact" class="glass-effect bg-glass rounded-3xl p-8 transform hover:scale-[1.02] transition-transform">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">联系方式</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="#" class="flex items-center gap-3 bg-white/30 rounded-xl p-6 glass-effect hover:bg-white/40 transition-colors">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/github.svg" class="w-6 h-6">
+                    <span class="text-gray-800">GitHub</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 bg-white/30 rounded-xl p-6 glass-effect hover:bg-white/40 transition-colors">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/mail.svg" class="w-6 h-6">
+                    <span class="text-gray-800">Email</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 bg-white/30 rounded-xl p-6 glass-effect hover:bg-white/40 transition-colors">
+                    <img src="https://unpkg.com/lucide-static@latest/icons/linkedin.svg" class="w-6 h-6">
+                    <span class="text-gray-800">LinkedIn</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 控制导航栏显示/隐藏的逻辑
+        const nav = document.querySelector('nav');
+        let lastScrollY = window.scrollY;
+        const heroSection = document.querySelector('.hero-section');
+
+        function updateNav() {
+            // 获取hero section的底部位置
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            
+            // 如果滚动超过hero section的80%高度，显示导航栏
+            if (window.scrollY > heroSection.offsetHeight * 0.8) {
+                nav.classList.remove('nav-hidden');
+                nav.classList.add('nav-visible');
+            } else {
+                nav.classList.remove('nav-visible');
+                nav.classList.add('nav-hidden');
+            }
+            
+            lastScrollY = window.scrollY;
+        }
+
+        // 监听滚动事件
+        window.addEventListener('scroll', updateNav);
+        
+        // 初始化时调用一次
+        updateNav();
+    </script>
 </body>
-</html>
+</html> 
