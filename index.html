@@ -45,6 +45,22 @@
             position: absolute;
             transition: transform 0.1s ease-out;
         }
+        .mobile-logo-container {
+            position: relative;
+            height: 64px;
+            width: 64px;
+        }
+        .mobile-logo-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .mobile-logo-container .eye {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.1s ease-out;
+        }
         .laser {
             position: absolute;
             background: linear-gradient(90deg, transparent, #ff0000, transparent);
@@ -86,28 +102,112 @@
                 opacity: 0;
             }
         }
+        /* 移动端导航样式 */
+        .mobile-nav {
+            display: none;
+        }
+        .mobile-menu-button {
+            display: none;
+        }
+        .mobile-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+        }
+        .mobile-dropdown.active {
+            display: block;
+        }
+        @media (max-width: 1024px) {
+            .desktop-nav {
+                display: none;
+            }
+            .mobile-nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+            }
+            .mobile-menu-button {
+                display: block;
+                padding: 0.5rem;
+                cursor: pointer;
+            }
+            .mobile-menu-button svg {
+                width: 24px;
+                height: 24px;
+            }
+            .logo-container {
+                margin-bottom: 1rem;
+            }
+            .tag-badge {
+                pointer-events: none;
+            }
+            .laser {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col lg:flex-row p-4 sm:p-8 selection:bg-gray-300 selection:text-gray-900">
 
     <aside class="w-full lg:w-1/5 lg:pr-12 mb-8 lg:mb-0">
-        <div class="mb-12 logo-container">
-            <img src="image/Tao.svg" alt="Tao Logo" class="h-16">
-            <img src="image/left-eye.svg" alt="Left Eye" class="h-16 left-eye">
-            <img src="image/right-eye.svg" alt="Right Eye" class="h-16 right-eye">
-        </div>
-        <nav class="space-y-3">
-            <div><a href="#" class="text-lg font-medium text-gray-700 hover:text-black transition-colors">作品</a></div>
-            <div><a href="#" class="text-lg font-medium text-gray-700 hover:text-black transition-colors">简历</a></div>
-            <div class="pt-6 space-y-2">
-                <div><a href="mailto:taodongxu@live.com" class="text-sm text-gray-500 hover:text-black transition-colors">Email</a></div>
-                <div><a href="https://www.instagram.com/d0n9xu" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-500 hover:text-black transition-colors">Instagram</a></div>
-                <div><a href="https://unsplash.com/@tdx_104" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-500 hover:text-black transition-colors">Unsplash</a></div>
+        <!-- 桌面端布局 -->
+        <div class="hidden lg:block">
+            <div class="mb-12 logo-container">
+                <img src="image/Tao.svg" alt="Tao Logo" class="h-16">
+                <img src="image/left-eye.svg" alt="Left Eye" class="h-16 left-eye eye">
+                <img src="image/right-eye.svg" alt="Right Eye" class="h-16 right-eye eye">
             </div>
-        </nav>
+            
+            <!-- 桌面端导航 -->
+            <nav class="desktop-nav space-y-3">
+                <div><a href="#" class="text-lg font-medium text-gray-700 hover:text-black transition-colors">作品</a></div>
+                <div><a href="#" class="text-lg font-medium text-gray-700 hover:text-black transition-colors">简历</a></div>
+                <div class="pt-6 space-y-2">
+                    <div><a href="mailto:taodongxu@live.com" class="text-sm text-gray-500 hover:text-black transition-colors">Email</a></div>
+                    <div><a href="https://www.instagram.com/d0n9xu" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-500 hover:text-black transition-colors">Instagram</a></div>
+                    <div><a href="https://unsplash.com/@tdx_104" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-500 hover:text-black transition-colors">Unsplash</a></div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- 移动端布局 -->
+        <div class="lg:hidden">
+            <nav class="mobile-nav">
+                <div class="flex items-center space-x-6">
+                    <div class="mobile-logo-container">
+                        <img src="image/Tao.svg" alt="Tao Logo" class="h-16">
+                        <img src="image/left-eye.svg" alt="Left Eye" class="h-16 left-eye eye">
+                        <img src="image/right-eye.svg" alt="Right Eye" class="h-16 right-eye eye">
+                    </div>
+                    <a href="#" class="text-lg font-medium text-gray-700 hover:text-black transition-colors">作品</a>
+                    <a href="#" class="text-lg font-medium text-gray-700 hover:text-black transition-colors">简历</a>
+                </div>
+                <div class="relative">
+                    <button class="mobile-menu-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                    <div class="mobile-dropdown">
+                        <div class="space-y-2">
+                            <div><a href="mailto:taodongxu@live.com" class="text-sm text-gray-500 hover:text-black transition-colors block">Email</a></div>
+                            <div><a href="https://www.instagram.com/d0n9xu" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-500 hover:text-black transition-colors block">Instagram</a></div>
+                            <div><a href="https://unsplash.com/@tdx_104" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-500 hover:text-black transition-colors block">Unsplash</a></div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </aside>
 
-    <main class="w-full lg:w-4/5">
+    <main class="w-full lg:w-4/5 lg:mt-12">
         <div class="max-w-2xl">
             <section class="mb-12">
                 <h2 class="text-4xl sm:text-5xl font-bold mb-4 text-gray-900">
@@ -141,10 +241,25 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const logoContainer = document.querySelector('.logo-container');
+            const mobileLogoContainer = document.querySelector('.mobile-logo-container');
             const leftEye = document.querySelector('.left-eye');
             const rightEye = document.querySelector('.right-eye');
             const maxDistance = 8;
             const tags = document.querySelectorAll('.tag-badge');
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileDropdown = document.querySelector('.mobile-dropdown');
+
+            // 移动端菜单交互
+            mobileMenuButton.addEventListener('click', function() {
+                mobileDropdown.classList.toggle('active');
+            });
+
+            // 点击页面其他地方关闭菜单
+            document.addEventListener('click', function(e) {
+                if (!mobileMenuButton.contains(e.target) && !mobileDropdown.contains(e.target)) {
+                    mobileDropdown.classList.remove('active');
+                }
+            });
 
             // 创建激光元素
             const leftLaser = document.createElement('div');
@@ -159,7 +274,7 @@
             const rightEyeBlackPixel = { x: 164, y: 37 }; // 右眼黑色像素中心点
 
             function moveEyes(e) {
-                const rect = document.querySelector('.logo-container').getBoundingClientRect();
+                const rect = document.querySelector('.logo-container, .mobile-logo-container').getBoundingClientRect();
                 const centerX = rect.left + rect.width / 2;
                 const centerY = rect.top + rect.height / 2;
 
