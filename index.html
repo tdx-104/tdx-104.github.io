@@ -1,194 +1,295 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人网站</title>
+    <title>Dongxu</title>
+    <link rel="icon" type="image/svg+xml" href="image/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        glass: 'rgba(255, 255, 255, 0.1)',
-                    },
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .glass-effect {
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+        /* 使用 Inter 字体 */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff; /* 页面背景色 */
+            color: #111827; /* 默认文字颜色 */
         }
-        html {
-            scroll-behavior: smooth;
+        /* 自定义样式，如果需要的话 */
+        .tag-badge {
+            background-color: #f3f4f6; /* 标签背景色 */
+            color: #374151; /* 标签文字颜色 */
+            padding: 8px 16px;
+            border-radius: 16px; /* 圆角标签 */
+            font-size: 0.875rem; /* 14px */
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            margin: 4px;
+            transition: all 0.3s ease-out;
         }
-        .hero-section {
-            height: calc(100vh - 2rem);
-        }
-        .nav-hidden {
-            transform: translateY(-100%);
+        .tag-badge.destroyed {
+            transform: scale(0);
             opacity: 0;
         }
-        .nav-visible {
-            transform: translateY(0);
-            opacity: 1;
+        .logo-container {
+            position: relative;
+            height: 64px; /* 设置固定高度，与h-16相同 */
+            margin-bottom: 3rem;
+        }
+        .logo-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .eye {
+            position: absolute;
+            transition: transform 0.1s ease-out;
+        }
+        .laser {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #ff0000, transparent);
+            height: 2px;
+            width: 0;
+            opacity: 0;
+            pointer-events: none;
+            transform-origin: left center;
+        }
+        .laser.active {
+            animation: laser 0.5s ease-out;
+        }
+        @keyframes laser {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        .card-fragment {
+            position: absolute;
+            background: #f3f4f6;
+            border-radius: 16px;
+            pointer-events: none;
+            animation: fragment-fly 1s ease-out forwards;
+        }
+        @keyframes fragment-fly {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) rotate(var(--tr));
+                opacity: 0;
+            }
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-purple-50 to-blue-100 min-h-screen">
-    <!-- 导航栏 -->
-    <nav class="glass-effect bg-glass fixed top-0 left-0 right-0 p-4 z-50 transition-all duration-300 nav-hidden">
-        <div class="container mx-auto">
-            <div class="flex gap-8">
-                <a href="#home" class="text-gray-600 hover:text-gray-900 transition-colors">首页</a>
-                <a href="#about" class="text-gray-600 hover:text-gray-900 transition-colors">关于</a>
-                <a href="#projects" class="text-gray-600 hover:text-gray-900 transition-colors">项目</a>
-                <a href="#contact" class="text-gray-600 hover:text-gray-900 transition-colors">联系</a>
-            </div>
+<body class="min-h-screen flex flex-col lg:flex-row p-4 sm:p-8 selection:bg-gray-300 selection:text-gray-900">
+
+    <aside class="w-full lg:w-1/5 lg:pr-12 mb-8 lg:mb-0">
+        <div class="mb-12 logo-container">
+            <img src="image/Tao.svg" alt="Tao Logo" class="h-16">
+            <img src="image/left-eye.svg" alt="Left Eye" class="h-16 left-eye">
+            <img src="image/right-eye.svg" alt="Right Eye" class="h-16 right-eye">
         </div>
-    </nav>
-
-    <!-- 主要内容区域 -->
-    <main class="container mx-auto px-4 max-w-6xl">
-        <!-- 个人简介部分 - 全屏展示 -->
-        <section id="home" class="hero-section flex items-center justify-center mb-8">
-            <div class="glass-effect bg-glass rounded-3xl p-12 w-full transform hover:scale-[1.02] transition-transform">
-                <div class="flex flex-col md:flex-row items-center gap-12">
-                    <div class="w-48 h-48 md:w-64 md:h-64 relative">
-                        <img src="https://raw.githubusercontent.com/tdx-104/tdx-104.github.io/refs/heads/main/image/favicon.svg" 
-                             class="w-full h-full object-contain" alt="Profile">
-                    </div>
-                    <div class="flex-1 text-center md:text-left">
-                        <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-4">您好👋，我是东旭，。</h1>
-                        <p class="text-2xl text-gray-600 mb-6">UI/UX 设计师</p>
-                        <p class="text-xl text-gray-600 max-w-2xl leading-relaxed">这是一个利用AI生成的网站测试。</p>
-                        <div class="mt-8 flex gap-4 justify-center md:justify-start">
-                            <a href="#about" class="px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">查看作品</a>
-                            <a href="#contact" class="px-8 py-3 bg-white/50 text-gray-800 rounded-full hover:bg-white/70 transition-colors">联系我</a>
-                        </div>
-                    </div>
-                </div>
+        <nav class="space-y-3">
+            <div><a href="#" class="text-lg font-medium text-gray-700 hover:text-black transition-colors">作品</a></div>
+            <div><a href="#" class="text-lg font-medium text-gray-700 hover:text-black transition-colors">简历</a></div>
+            <div class="pt-6 space-y-2">
+                <div><a href="mailto:taodongxu@live.com" class="text-sm text-gray-500 hover:text-black transition-colors">Email</a></div>
+                <div><a href="https://www.instagram.com/d0n9xu" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-500 hover:text-black transition-colors">Instagram</a></div>
+                <div><a href="https://unsplash.com/@tdx_104" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-500 hover:text-black transition-colors">Unsplash</a></div>
             </div>
-        </section>
+        </nav>
+    </aside>
 
-        <!-- 关于我/技能展示 -->
-        <section id="about" class="glass-effect bg-glass rounded-3xl p-8 mb-8 transform hover:scale-[1.02] transition-transform">
-            <h2 class="text-2xl font-bold mb-6 text-gray-800">专业技能</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-white/30 rounded-xl p-6 glass-effect">
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="https://unpkg.com/lucide-static@latest/icons/pen-tool.svg" class="w-6 h-6">
-                        <h3 class="text-lg font-semibold">UI 设计</h3>
-                    </div>
-                    <div class="space-y-2">
-                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm mr-2">Figma</span>
-                        <span class="inline-block px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm mr-2">Sketch</span>
-                        <span class="inline-block px-3 py-1 bg-orange-100 text-orange-600 rounded-full text-sm">Adobe XD</span>
-                    </div>
-                </div>
-                <div class="bg-white/30 rounded-xl p-6 glass-effect">
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="https://unpkg.com/lucide-static@latest/icons/users.svg" class="w-6 h-6">
-                        <h3 class="text-lg font-semibold">UX 研究</h3>
-                    </div>
-                    <div class="space-y-2">
-                        <span class="inline-block px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm mr-2">用户研究</span>
-                        <span class="inline-block px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm mr-2">原型设计</span>
-                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">可用性测试</span>
-                    </div>
-                </div>
-                <div class="bg-white/30 rounded-xl p-6 glass-effect">
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="https://unpkg.com/lucide-static@latest/icons/palette.svg" class="w-6 h-6">
-                        <h3 class="text-lg font-semibold">视觉设计</h3>
-                    </div>
-                    <div class="space-y-2">
-                        <span class="inline-block px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm mr-2">品牌设计</span>
-                        <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-600 rounded-full text-sm mr-2">动效设计</span>
-                        <span class="inline-block px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-sm">插画</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <main class="w-full lg:w-4/5">
+        <div class="max-w-2xl">
+            <section class="mb-12">
+                <h2 class="text-4xl sm:text-5xl font-bold mb-4 text-gray-900">
+                    Hello! <span role="img" aria-label="Waving hand">👋</span>
+                </h2>
+                <p class="text-lg sm:text-xl text-gray-700 leading-relaxed">
+                    我叫陶东旭, 是一位 UI/UX 设计实习生; <br class="hidden sm:block">
+                    我正在尝试在 AI <span role="img" aria-label="Robot face">🤖</span> 的帮助下, 制作一份自己的线上网站。
+                </p>
+            </section>
 
-        <!-- 项目展示 -->
-        <section id="projects" class="glass-effect bg-glass rounded-3xl p-8 mb-8 transform hover:scale-[1.02] transition-transform">
-            <h2 class="text-2xl font-bold mb-6 text-gray-800">项目展示</h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-white/30 rounded-xl p-6 glass-effect">
-                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" 
-                         class="w-full h-48 object-cover rounded-lg mb-4" alt="Project 1">
-                    <h3 class="text-xl font-semibold mb-2">电商App重设计</h3>
-                    <p class="text-gray-600 mb-4">通过用户研究和交互设计，提升用户购物体验，实现转化率提升40%。重点优化了商品展示和结账流程。</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">UI设计</span>
-                        <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">用户体验</span>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm">原型设计</span>
-                    </div>
+            <section>
+                <div class="flex flex-wrap gap-2 sm:gap-3">
+                    <span class="tag-badge">
+                        <span role="img" aria-label="Camera" class="mr-2">📸</span> 阳光机
+                    </span>
+                    <span class="tag-badge">
+                        <span role="img" aria-label="Person raising hand" class="mr-2">🙋‍♂️</span> UI/UX 设计练习生
+                    </span>
+                    <span class="tag-badge">
+                        <span role="img" aria-label="Microphone" class="mr-2">🎤</span> Live house 选手
+                    </span>
+                    <span class="tag-badge">
+                        <span role="img" aria-label="Game controller" class="mr-2">🎮</span> 数码产品爱好者
+                    </span>
                 </div>
-                <div class="bg-white/30 rounded-xl p-6 glass-effect">
-                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" 
-                         class="w-full h-48 object-cover rounded-lg mb-4" alt="Project 2">
-                    <h3 class="text-xl font-semibold mb-2">金融Dashboard设计</h3>
-                    <p class="text-gray-600 mb-4">为金融机构设计的数据可视化界面，通过清晰的信息层级和直观的数据展示，提升决策效率。</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm">数据可视化</span>
-                        <span class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm">交互设计</span>
-                        <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">用户研究</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 联系方式 -->
-        <section id="contact" class="glass-effect bg-glass rounded-3xl p-8 transform hover:scale-[1.02] transition-transform">
-            <h2 class="text-2xl font-bold mb-6 text-gray-800">联系方式</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <a href="#" class="flex items-center gap-3 bg-white/30 rounded-xl p-6 glass-effect hover:bg-white/40 transition-colors">
-                    <img src="https://unpkg.com/lucide-static@latest/icons/github.svg" class="w-6 h-6">
-                    <span class="text-gray-800">GitHub</span>
-                </a>
-                <a href="#" class="flex items-center gap-3 bg-white/30 rounded-xl p-6 glass-effect hover:bg-white/40 transition-colors">
-                    <img src="https://unpkg.com/lucide-static@latest/icons/mail.svg" class="w-6 h-6">
-                    <span class="text-gray-800">Email</span>
-                </a>
-                <a href="#" class="flex items-center gap-3 bg-white/30 rounded-xl p-6 glass-effect hover:bg-white/40 transition-colors">
-                    <img src="https://unpkg.com/lucide-static@latest/icons/linkedin.svg" class="w-6 h-6">
-                    <span class="text-gray-800">LinkedIn</span>
-                </a>
-            </div>
-        </section>
+            </section>
+        </div>
     </main>
 
     <script>
-        // 控制导航栏显示/隐藏的逻辑
-        const nav = document.querySelector('nav');
-        let lastScrollY = window.scrollY;
-        const heroSection = document.querySelector('.hero-section');
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoContainer = document.querySelector('.logo-container');
+            const leftEye = document.querySelector('.left-eye');
+            const rightEye = document.querySelector('.right-eye');
+            const maxDistance = 8;
+            const tags = document.querySelectorAll('.tag-badge');
 
-        function updateNav() {
-            // 获取hero section的底部位置
-            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-            
-            // 如果滚动超过hero section的80%高度，显示导航栏
-            if (window.scrollY > heroSection.offsetHeight * 0.8) {
-                nav.classList.remove('nav-hidden');
-                nav.classList.add('nav-visible');
-            } else {
-                nav.classList.remove('nav-visible');
-                nav.classList.add('nav-hidden');
+            // 创建激光元素
+            const leftLaser = document.createElement('div');
+            const rightLaser = document.createElement('div');
+            leftLaser.className = 'laser';
+            rightLaser.className = 'laser';
+            document.body.appendChild(leftLaser);
+            document.body.appendChild(rightLaser);
+
+            // 眼睛黑色像素的位置（相对于SVG视口）
+            const leftEyeBlackPixel = { x: 88, y: 37 }; // 左眼黑色像素中心点
+            const rightEyeBlackPixel = { x: 164, y: 37 }; // 右眼黑色像素中心点
+
+            function moveEyes(e) {
+                const rect = document.querySelector('.logo-container').getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                const mouseX = e.clientX - centerX;
+                const mouseY = e.clientY - centerY;
+
+                const distance = Math.min(Math.sqrt(mouseX * mouseX + mouseY * mouseY), maxDistance);
+                const angle = Math.atan2(mouseY, mouseX);
+
+                const moveX = Math.cos(angle) * distance;
+                const moveY = Math.sin(angle) * distance;
+
+                leftEye.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                rightEye.style.transform = `translate(${moveX}px, ${moveY}px)`;
             }
-            
-            lastScrollY = window.scrollY;
-        }
 
-        // 监听滚动事件
-        window.addEventListener('scroll', updateNav);
-        
-        // 初始化时调用一次
-        updateNav();
+            function shootLaser(target) {
+                const leftEyeRect = leftEye.getBoundingClientRect();
+                const rightEyeRect = rightEye.getBoundingClientRect();
+                const targetRect = target.getBoundingClientRect();
+
+                // 计算眼睛黑色像素的实际位置
+                const leftEyeBlackPixelPos = {
+                    x: leftEyeRect.left + (leftEyeBlackPixel.x / 200) * leftEyeRect.width,
+                    y: leftEyeRect.top + (leftEyeBlackPixel.y / 74) * leftEyeRect.height
+                };
+                const rightEyeBlackPixelPos = {
+                    x: rightEyeRect.left + (rightEyeBlackPixel.x / 200) * rightEyeRect.width,
+                    y: rightEyeRect.top + (rightEyeBlackPixel.y / 74) * rightEyeRect.height
+                };
+
+                // 计算目标中心点
+                const targetCenter = {
+                    x: targetRect.left + targetRect.width/2,
+                    y: targetRect.top + targetRect.height/2
+                };
+
+                // 设置激光起点和角度
+                function setLaser(laser, startPoint, endPoint) {
+                    laser.style.left = `${startPoint.x}px`;
+                    laser.style.top = `${startPoint.y}px`;
+                    
+                    const angle = Math.atan2(
+                        endPoint.y - startPoint.y,
+                        endPoint.x - startPoint.x
+                    );
+                    
+                    const distance = Math.sqrt(
+                        Math.pow(endPoint.x - startPoint.x, 2) + 
+                        Math.pow(endPoint.y - startPoint.y, 2)
+                    );
+                    
+                    laser.style.width = `${distance}px`;
+                    laser.style.transform = `rotate(${angle}rad)`;
+                }
+
+                // 设置两条激光
+                setLaser(leftLaser, leftEyeBlackPixelPos, targetCenter);
+                setLaser(rightLaser, rightEyeBlackPixelPos, targetCenter);
+
+                // 激活激光动画
+                leftLaser.classList.add('active');
+                rightLaser.classList.add('active');
+
+                // 创建卡片碎片效果
+                createCardFragments(target);
+
+                // 让卡片消失
+                target.classList.add('destroyed');
+                setTimeout(() => {
+                    target.remove();
+                }, 300);
+
+                // 移除动画类以便可以重复触发
+                setTimeout(() => {
+                    leftLaser.classList.remove('active');
+                    rightLaser.classList.remove('active');
+                }, 500);
+            }
+
+            function createCardFragments(card) {
+                const rect = card.getBoundingClientRect();
+                const fragmentCount = 8; // 碎片数量
+                
+                for (let i = 0; i < fragmentCount; i++) {
+                    const fragment = document.createElement('div');
+                    fragment.className = 'card-fragment';
+                    
+                    // 随机碎片大小
+                    const size = Math.random() * 20 + 10;
+                    fragment.style.width = `${size}px`;
+                    fragment.style.height = `${size}px`;
+                    
+                    // 随机起始位置（在卡片范围内）
+                    const startX = rect.left + Math.random() * rect.width;
+                    const startY = rect.top + Math.random() * rect.height;
+                    fragment.style.left = `${startX}px`;
+                    fragment.style.top = `${startY}px`;
+                    
+                    // 随机飞行方向和旋转
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 100 + 50;
+                    const tx = Math.cos(angle) * distance;
+                    const ty = Math.sin(angle) * distance;
+                    const tr = Math.random() * 360;
+                    
+                    fragment.style.setProperty('--tx', `${tx}px`);
+                    fragment.style.setProperty('--ty', `${ty}px`);
+                    fragment.style.setProperty('--tr', `${tr}deg`);
+                    
+                    document.body.appendChild(fragment);
+                    
+                    // 动画结束后移除碎片
+                    setTimeout(() => {
+                        fragment.remove();
+                    }, 1000);
+                }
+            }
+
+            // 添加鼠标移动事件监听
+            document.addEventListener('mousemove', moveEyes);
+
+            // 添加卡片点击事件
+            tags.forEach(tag => {
+                tag.addEventListener('click', (e) => {
+                    shootLaser(e.currentTarget);
+                });
+            });
+        });
     </script>
+
 </body>
-</html> 
+</html>
